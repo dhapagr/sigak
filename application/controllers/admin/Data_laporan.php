@@ -357,7 +357,7 @@ class Data_laporan extends CI_Controller {
 			Swal.fire({
 				position:	"top-center-start",
 				icon: "success",
-				title: "Data Berhasil Diubah",
+				title: "Data Berhasil Dihapus",
 				showConfirmButton: false,
 				timer: 2000,
 				confirmButtonClass: "btn btn-primary",

@@ -37,6 +37,8 @@ class Dashboard extends CI_Controller {
 		$data['tema'] 				= $this->Superadmin_model->get_tema()->result();
 		$data['dt_kecelakaan'] 		= $this->Superadmin_model->tampil_data_kecelakaan()->num_rows();
 		$data['dt_kelurahan'] 		= $this->Superadmin_model->tampil_data_kelurahan()->num_rows();
+		$data['dt_pengaduan'] 		= $this->Admin_model->get_pengaduan_jawab()->num_rows();
+		$data['dt_pengaduan_blm_jawab'] 		= $this->Admin_model->get_pengaduan_belum()->num_rows();
 		$this->load->view('superadmin/template/header_admin');
 		$this->load->view('superadmin/template/navigation_admin', $data);
 		$this->load->view('superadmin/dashboard', $data);

@@ -52,7 +52,6 @@
                                                         </select>
                                                     <div class="input-group-append">
                                                         <button type="button" onclick="filter_kec()" class="btn btn-warning glow mr-1 mb-1"><i class="bx bx-filter"></i>
-                                                            <span class="align-middle ml-25">Filter</span>
                                                         </button>                                                    
                                                     </div>
                                                 </div>
@@ -67,7 +66,7 @@
                                                     </select>
                                                     <div class="input-group-append">
                                                         <button type="button" onclick="filter_kel()" class="btn btn-warning glow mr-1 mb-1"><i class="bx bx-filter"></i>
-                                                            <span class="align-middle ml-25">Filter</span>
+                                                           
                                                         </button>
                                                     </div>
                                                 </div>
@@ -137,6 +136,18 @@
         }).setView({ lng: INITIAL_LNG, lat: INITIAL_LAT }, 12);
         var hash = new L.Hash(map);
 
+        var imgDir = '<?php echo base_url("assets"); ?>/user/img/'
+        var redMarker = L.icon({
+            iconUrl: imgDir + 'pothole.png',
+            iconRetinaUrl: imgDir + 'pothole.png',
+            iconSize: [30, 30],
+            iconAnchor: [12, 41],
+            popupAnchor: [-0, -31],
+            // shadowUrl: imgDir + 'marker-shadow.png',
+            shadowSize: [41, 41],
+            shadowAnchor: [14, 41]
+        })
+
         L.control.layers({
             "Streets": streets,
             "Earth": earth,
@@ -149,7 +160,7 @@
         <?php endforeach ;?>
 
         <?php foreach($data_kecelakaan as $key => $val) :?>
-            L.marker([<?= $val['latitude'] ?>,<?= $val['longitude'] ?>]).bindPopup("data").addTo(map);
+            L.marker([<?= $val['latitude'] ?>,<?= $val['longitude'] ?>], {icon: redMarker}).bindPopup("data").addTo(map);
         <?php endforeach ;?>
 
         // var marker = new Array();
@@ -162,85 +173,99 @@
         //         }
 
     </script>
-    <script>
-        function filter_kec() {
-            var data = document.getElementById('kecamatan').value;
-            // console.log(data);
-            if (data != '') {
-                $.ajax({
-					url: "<?php echo base_url('admin/Peta_kecelakaan/filter_kecamatan/') ?>"+data,
-                    success: function (data) {
+     <script>
+        $(document).ready(function() {
+			$('#kecamatan').change(function() {
+				var data = $('#kecamatan').val();
+       
+                if (data != '') {
+                    $.ajax({
+                        url: "<?php echo base_url('admin/Peta_kecelakaan/filter_kecamatan/') ?>"+data,
+                        success: function (data) {
+                            var imgDir = '<?php echo base_url("assets"); ?>/user/img/'
+                            var redMarker = L.icon({
+                                iconUrl: imgDir + 'pothole.png',
+                                iconRetinaUrl: imgDir + 'pothole.png',
+                                iconSize: [30, 30],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [-0, -31],
+                                // shadowUrl: imgDir + 'marker-shadow.png',
+                                shadowSize: [41, 41],
+                                shadowAnchor: [14, 41]
+                            })
+
+                            $(".leaflet-marker-icon").remove();
+                            $(".leaflet-popup").remove();
+                            $(".leaflet-marker-shadow").remove();    
                             
-                        $(".leaflet-marker-icon").remove();
-                        $(".leaflet-popup").remove();
-                        $(".leaflet-marker-shadow").remove();    
-                        
-                        var jsonData = JSON.parse(data);
+                            var jsonData = JSON.parse(data);
 
-                        var items2 = [];
-                        
-                        for (var i = 0; i < jsonData.data_kecelakaan.length; i++) {
-                            var pecah = jsonData.data_kecelakaan[i];
-                            var json = {
-                                "lat"   : pecah.latitude, 
-                                "lon"   : pecah.longitude,
-                            };
+                            var items2 = [];
+                            
+                            for (var i = 0; i < jsonData.data_kecelakaan.length; i++) {
+                                var pecah = jsonData.data_kecelakaan[i];
+                                var json = {
+                                    "lat"   : pecah.latitude, 
+                                    "lon"   : pecah.longitude,
+                                };
 
-                            items2.push(json);
+                                items2.push(json);
+                            }
+
+                            var marker = new Array();
+
+                            for(i=0;i<items2.length;i++){
+                                var LamMarker = new L.marker([items2[i].lat, items2[i].lon], {icon: redMarker});
+                                marker.push(LamMarker);
+                                map.addLayer(marker[i]);
+                            }
                         }
-
-                        var marker = new Array();
-
-                        for(i=0;i<items2.length;i++){
-                            var LamMarker = new L.marker([items2[i].lat, items2[i].lon]);
-                            marker.push(LamMarker);
-                            map.addLayer(marker[i]);
-                        }
-                    }
-				})            
-            }else{
-                swal('Informasi','Kecamatan tidak ditemukan', 'info');
-            }
-        }
+                    })            
+                }else{
+                    swal('Informasi','Kecamatan tidak ditemukan', 'info');
+                }
+            })
+        })
        
     </script>
     <script>
-         function filter_kel() {
-            var data = document.getElementById('kelurahan').value;
-            // console.log(data);
-            if (data != '') {
-				$.ajax({
-					url: "<?php echo base_url('admin/Peta_kecelakaan/filter_kelurahan/') ?>"+data,
-                    success: function (data) {
-                        $(".leaflet-marker-icon").remove();
-                        $(".leaflet-popup").remove();
-                        $(".leaflet-marker-shadow").remove();    
-                        
-                        var jsonData = JSON.parse(data);
+        $(document).ready(function() {
+			$('#kelurahan').change(function() {
+				var data = $('#kelurahan').val();
+                if (data != '') {
+                    $.ajax({
+                        url: "<?php echo base_url('admin/Peta_kecelakaan/filter_kelurahan/') ?>"+data,
+                        success: function (data) {
+                            $(".leaflet-marker-icon").remove();
+                            $(".leaflet-popup").remove();
+                            $(".leaflet-marker-shadow").remove();    
+                            
+                            var jsonData = JSON.parse(data);
 
-                        var items2 = [];
-                        
-                        for (var i = 0; i < jsonData.data_kecelakaan.length; i++) {
-                            var pecah = jsonData.data_kecelakaan[i];
-                            var json = {
-                                "lat"   : pecah.latitude, 
-                                "lon"   : pecah.longitude,
-                            };
+                            var items2 = [];
+                            
+                            for (var i = 0; i < jsonData.data_kecelakaan.length; i++) {
+                                var pecah = jsonData.data_kecelakaan[i];
+                                var json = {
+                                    "lat"   : pecah.latitude, 
+                                    "lon"   : pecah.longitude,
+                                };
 
-                            items2.push(json);
+                                items2.push(json);
+                            }
+
+                            var marker = new Array();
+
+                            for(i=0;i<items2.length;i++){
+                                var LamMarker = new L.marker([items2[i].lat, items2[i].lon], {icon: redMarker});
+                                marker.push(LamMarker);
+                                map.addLayer(marker[i]);
+                            }
                         }
-
-                        var marker = new Array();
-
-                        for(i=0;i<items2.length;i++){
-                            var LamMarker = new L.marker([items2[i].lat, items2[i].lon]);
-                            marker.push(LamMarker);
-                            map.addLayer(marker[i]);
-                        }
-                    }
-				})
-            }else{
-                swal('Informasi','Kelurahan tidak ditemukan', 'info');
-            }
-        }
+                    })
+                }else{
+                    swal('Informasi','Kelurahan tidak ditemukan', 'info');
+                }
+            })
+        })
     </script>

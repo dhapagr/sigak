@@ -1,5 +1,3 @@
-<script src="<?php echo base_url("assets"); ?>/admin/vendors/js/vendors.min.js"></script>
-
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="content-wrapper">

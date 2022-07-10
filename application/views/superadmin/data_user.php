@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url("assets"); ?>/admin/vendors/css/vendors.min.css">
-<script src="<?php echo base_url("assets"); ?>/admin/vendors/js/vendors.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="<?php echo base_url("assets"); ?>/admin/vendors/css/vendors.min.css">
+<script src="<?php echo base_url("assets"); ?>/admin/vendors/js/vendors.min.js"></script> -->
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url("assets"); ?>/admin/vendors/css/animate/animate.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url("assets"); ?>/admin/vendors/css/extensions/sweetalert2.min.css">
@@ -131,7 +131,7 @@
                                                         <td>
                                                             <div  class="form-row">
                                                                 <!-- <button type="button" class="btn btn-icon btn-warning mr-1 mb-1" onclick="window.location.href='<?php echo base_url('superadmin/Data_user/edit_view/'.$dt_admin['id_user']) ?>'"><i class="bx bx-edit" ></i></button> -->
-                                                                <button type="button" class="btn btn-icon btn-warning mr-1 mb-1" onclick="edit(<?php echo $dt_admin['id_user'] ?>)"><i class="bx bx-edit" ></i></button>
+                                                                <button type="button" class="btn btn-icon btn-warning mr-1 mb-1" onclick="window.location.href='<?php echo base_url('superadmin/Data_user/edit_user/'.$dt_admin['id_user']) ?>'"><i class="bx bx-edit" ></i></button>
                                                                 <button type="button" class="btn btn-icon btn-danger mr-1 mb-1" onclick="hapus(<?php echo $dt_admin['id_user'] ?>)"><i class="bx bxs-trash"></i></button>
                                                             </div>   
                                                         </td> 

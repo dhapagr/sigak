@@ -115,33 +115,33 @@
             // var latInput = document.querySelector("[name=latitude]");
             // var lngInput = document.querySelector("[name=longitude]");
 
-            // var myIcon = new L.Icon({
-            //     iconUrl: '<?php echo base_url("assets"); ?>/admin/icon/marker-icon-red.png',
-            //     shadowUrl: '<?php echo base_url("assets"); ?>/admin/icon/marker-shadow.png',
-            //     // iconSize: [40, 45], // size of the icon
-            // });
+            var myIcon = new L.Icon({
+                iconUrl: '<?php echo base_url("assets"); ?>/admin/icon/marker-icon-red.png',
+                shadowUrl: '<?php echo base_url("assets"); ?>/admin/icon/marker-shadow.png',
+                // iconSize: [40, 45], // size of the icon
+            });
 
             var curLocation = [<?= $key['latitude'] ?>,<?= $key['longitude'] ?>];
 
             map.attributionControl.setPrefix(false);
 
-            // var marker = new L.marker(curLocation, 
-            // {
-            //     icon: myIcon ,
-            //     draggable: 'true',
-            // });
+            var marker = new L.marker(curLocation, 
+            {
+                icon: myIcon ,
+                // draggable: 'true',
+            });
 
             // marker.on('dragend', function(event)
             // {
             //     var position = marker.getLatLng();
-            //     marker.setLatLng(position, {
-            //         draggable: 'true',
-            //     }).bindPopup(position).update();
+            //     // marker.setLatLng(position, {
+            //     //     draggable: 'true',
+            //     // }).bindPopup(position).update();
             //     $("#longitude").val(position.lng);
             //     $("#latitude").val(position.lat);
             // });
 
-            // map.addLayer(marker);
+            map.addLayer(marker);
         <?php endforeach ;?>
     </script>
         

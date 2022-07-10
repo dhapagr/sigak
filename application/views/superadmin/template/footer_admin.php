@@ -49,20 +49,17 @@
     <script src="<?php echo base_url("assets"); ?>/admin/js/scripts/pages/dashboard-ecommerce.js"></script>
     <script src="<?php echo base_url("assets"); ?>/admin/js/scripts/pages/dashboard-ecommerce.min.js"></script>
 
-    <!-- <script src="<?php echo base_url("assets"); ?>/admin/vendors/js/extensions/toastr.min.js"></script>
-    <script src="<?php echo base_url("assets"); ?>/admin/js/scripts/extensions/toastr.js"></script> -->
-
     <script src="<?php echo base_url("assets"); ?>/admin/js/aos.js"></script>
 
     <script src="<?php echo base_url("assets"); ?>/admin/vendors/js/forms/select/select2.full.min.js"></script>
     <script src="<?php echo base_url("assets"); ?>/admin/vendors/js/forms/validation/jquery.validate.min.js"></script>
     <script src="<?php echo base_url("assets"); ?>/admin/js/scripts/forms/validation/form-validation.js"></script>
 
-    <!-- <script src="<?php echo base_url("assets"); ?>/admin/vendors/js/extensions/sweetalert2.all.min.js"></script>
-    <script src="<?php echo base_url("assets"); ?>/admin/vendors/js/extensions/polyfill.min.js"></script>
-    <script src="<?php echo base_url("assets"); ?>/admin/js/scripts/extensions/sweet-alerts.js"></script> -->
-
     <script src="<?php echo base_url("assets"); ?>/admin/js/scripts/pages/page-user-profile.js"></script>
-    <!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <script src="<?php echo base_url("assets"); ?>/admin/js/L.Control.GeoapifyAddressSearch.js"></script>
-    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.3.1/highlight.min.js"></script> -->
+   
+    <script src="<?php echo base_url("assets"); ?>/admin/vendors/js/extensions/sweetalert2.all.min.js"></script>
+    <script src="<?php echo base_url("assets"); ?>/admin/vendors/js/extensions/polyfill.min.js"></script>
+    <script src="<?php echo base_url("assets"); ?>/admin/js/scripts/extensions/sweet-alerts.js"></script>
+
+    <script src="<?php echo base_url("assets"); ?>/admin/vendors/js/extensions/toastr.min.js"></script>
+    <script src="<?php echo base_url("assets"); ?>/admin/js/scripts/extensions/toastr.js"></script>

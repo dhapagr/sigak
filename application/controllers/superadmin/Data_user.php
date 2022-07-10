@@ -27,12 +27,15 @@ class Data_user extends CI_Controller {
 		$this->load->view('superadmin/data_user', $data);
 		$this->load->view('superadmin/template/footer_admin');
 	}
-	public function edit_view($id)
+	public function edit_user($id)
 	{	
 		$id_user = $this->session->userdata('id_user');		
 		$data['data_user']			= $this->Superadmin_model->get_dataById($id_user);
 		// $data['data_by_id']			= $this->admin_model->get_dtkec($id)->result_array();
 		$data['detail_user'] 		= $this->db->query("SELECT * FROM tb_user WHERE id_user = '$id'")->result_array();
+		$data['detail']		    	= $this->db->get('tb_user')->result_array();
+        $data['admin_detail']		= $this->Superadmin_model->get_data_admin()->result_array();
+        $data['spadmin_detail']		= $this->Superadmin_model->get_data_superadmin()->result_array();
 		$this->load->view('superadmin/template/header_admin');
 		$this->load->view('superadmin/template/navigation_admin', $data);
 		$this->load->view('superadmin/template/v_edituser', $data);
@@ -153,7 +156,7 @@ class Data_user extends CI_Controller {
 			$cek_perubahan = $this->db->query("SELECT * FROM tb_user WHERE id_user = '$id'")->result_array();
 			foreach($cek_perubahan as $cek_berubah);
 
-			if($pass == '')
+			if($pass == null)
 			{
 				if(
 					$cek_berubah['nama_user'] 			== $nama && 

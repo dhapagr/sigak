@@ -61,7 +61,7 @@
                                             <div class="media d-flex align-items-center">
                                                 <div class="media-left pr-0">
                                                     <div class="avatar mr-1 m-0">
-                                                        <img src="<?php echo base_url("assets"); ?>/admin/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39">
+                                                        <img src="<?php echo base_url("assets"); ?>/admin/images/profile/profile_default.png" alt="avatar" height="39" width="39">
                                                     </div>
                                                 </div>
                                                 <div class="media-body">

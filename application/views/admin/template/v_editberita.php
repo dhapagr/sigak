@@ -121,8 +121,8 @@
                                         <button type="reset" onclick="tutup()" class="btn btn-danger glow mr-1 mb-1"><i class="bx bxs-x-square"></i>
                                             <span class="align-middle ml-25">Clear Data</span> 
                                         </button>
-                                        <button id="submit" type="submit" class="btn btn-success glow mr-1 mb-1"><i class="bx bxs-add-to-queue"></i>
-                                            <span class="align-middle ml-25">Tambah Data</span>
+                                        <button id="submit" type="submit" class="btn btn-warning glow mr-1 mb-1"><i class="bx bxs-add-to-queue"></i>
+                                            <span class="align-middle ml-25">Edit Data</span>
                                         </button>
                                     </fieldset>
                                 </form>
