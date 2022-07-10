@@ -72,7 +72,7 @@
     <div class="col-lg-1 col-md-1 col-1 d-flex justify-content-center">
       <img style="min-width: 60px ; width:60%; height:50px;" src="<?php echo base_url("assets"); ?>/user/img/Kota-madiun.png" class="img-fluid" alt="">
     </div>
-    <h1 class="logo me-auto" style = "margin-left : 20px;"><a href="index.html">SIGMA</a></h1>
+    <h1 class="logo me-auto" style = "margin-left : 20px;"><a href="index.html">SIGAK</a></h1>
     <!-- Uncomment below if you prefer to use an image logo -->
     <!-- <a href="index.html" class="logo me-auto"><img src="<?php echo base_url("assets"); ?>/user/img/logo.png" alt="" class="img-fluid"></a>-->
 

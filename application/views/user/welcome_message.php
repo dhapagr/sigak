@@ -54,7 +54,9 @@
 
         <div class="section-title">
           <h2>SISTEM INFORMASI GEOGRAFIS</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>SIGAK merupakan aplikasi atau sistem informasi geografis yang memuat tentang titik dan informasi seputar kecelakaan. 
+            Sistem ini bertujuan untuk menginformasikan titik rawan kecelakaan di Kota Madiun dan sistem aspirasi masyarakat dalam menlaporkan kejadian seputar kecelakaan sebagai sarana untuk 
+            mempermudah pengelolaan, pendataan dan penyampaian informasi kecelakaan di Kota Madiun.</p>
         </div>
       </div>
     </section>
