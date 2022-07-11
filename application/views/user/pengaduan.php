@@ -241,7 +241,13 @@
                         <div id="sekilas<?=$i?>" style="text-align: justify; margin-left: 20px; margin-right: 20px; margin-top: 10px;">
                             <?php if (strlen($pengaduan['pesan']) > 10){
                                 $str = substr($pengaduan['pesan'], 0, 90) . '...';
-                            } echo "<span class='text-secondary'>".$str."</span>";?>
+                                echo "<span class='text-secondary'>".$str."</span>";
+                            } 
+                            else
+                            {
+                                echo "<span class='text-secondary'>".$pengaduan['pesan']."</span>";
+                            }?>
+                            
                         </div>
                         <div id="demo<?=$i?>" class="collapse">
                             <div style="margin-left: 20px; margin-right: 20px; margin-top: 10px;">

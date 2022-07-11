@@ -59,7 +59,7 @@
                                             <label for="last-name" class="col-form-label">VIDEO YOUTUBE</label>
                                         </div>
                                         <div class="col-lg-10 col-9">
-                                            <input type="text" id="last-name" class="form-control" name="video" placeholder="Contoh link: http://www.youtube.com/embed/xbuEmoRWQHU" required/>
+                                            <input type="text" id="last-name" class="form-control" name="video" placeholder="Contoh link: http://www.youtube.com/embed/xbuEmoRWQHU" />
                                         </div>
                                     </div>
                                     
