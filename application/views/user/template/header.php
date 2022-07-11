@@ -2,12 +2,7 @@
 <html lang="en">
 
 <he>
-  <!-- <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <meta content="" name="description">
-  <meta content="" name="keywords"> -->
-
+ 
   <!-- Favicons -->
   <link href="<?php echo base_url("assets"); ?>/user/img/favicon.png" rel="icon">
   <link href="<?php echo base_url("assets"); ?>/user/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -72,10 +67,8 @@
     <div class="col-lg-1 col-md-1 col-1 d-flex justify-content-center">
       <img style="min-width: 60px ; width:60%; height:50px;" src="<?php echo base_url("assets"); ?>/user/img/Kota-madiun.png" class="img-fluid" alt="">
     </div>
-    <h1 class="logo me-auto" style = "margin-left : 20px;"><a href="index.html">SIGAK</a></h1>
-    <!-- Uncomment below if you prefer to use an image logo -->
-    <!-- <a href="index.html" class="logo me-auto"><img src="<?php echo base_url("assets"); ?>/user/img/logo.png" alt="" class="img-fluid"></a>-->
-
+    <h1 class="logo me-auto" style = "margin-left : 20px;"><a href="">SIGAK</a></h1>
+   
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="nav-link scrollto " href="<?php echo base_url("Welcome"); ?>">Home</a></li>

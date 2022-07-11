@@ -213,8 +213,7 @@
         </div>
     </section>
 
-    <!-- daftar pengaduan -->
-    <section id="cta" class="ctalogin"></section>
+ 
     <section id="about" class="about">
         <div class="container-fluid" data-aos="fade-up">
             <div class="section-title">
