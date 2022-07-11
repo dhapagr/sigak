@@ -347,6 +347,18 @@ class Data_kecelakaan extends CI_Controller {
 
 		$this->load->view('admin/template/v_tambah_data_kecelakaan', $data);
 	}
+	public function show_data_edit_kecelakaan()
+	{
+		$data['data_wilayah']		= $this->Admin_model->tampil_data_kecelakaan()->result_array();
+		$data['data_kecamatan']		= $this->Admin_model->tampil_data_kecamatan()->result_array();
+		$data['data_waktu']		 	= $this->db->get('tb_wkt')->result_array();
+		$data['data_kendaraan']		= $this->db->get('tb_jeniskendaraan')->result_array();
+		$data['data_profesi']		= $this->db->get('tb_profesikorban')->result_array();
+		$data['data_umur']			= $this->db->get('tb_umurkorban')->result_array();
+		$data['data_type']			= $this->db->get('tb_typekejadian')->result_array();
+
+		$this->load->view('admin/template/v_edit_data_kecelakaan', $data);
+	}
 
 	public function tambah_data_kecelakaan(){
 		$jalan				= $this->input->post('jalan');
@@ -389,5 +401,10 @@ class Data_kecelakaan extends CI_Controller {
 		}else{
 			echo 0; // ada inputan kosong
 		}
+	}
+	function hapus_dt_kolom_add($id){
+		$where = array('id_kecelakaan' => $id);
+		$this->db->delete('tb_kecelakaan', $where);
+		$this->Admin_model->hapus_data($where,'tb_kecelakaan');		
 	}
 }

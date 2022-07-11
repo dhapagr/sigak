@@ -410,7 +410,7 @@
                 },
                 success: function (response) {
                     if(response != 0){
-                        alert('sukses data kecelakaan berhasil ditambahkan');
+                        // alert('sukses data kecelakaan berhasil ditambahkan');
                         $(wrapper).html(response);
 
                         // form input dimatikan
@@ -421,10 +421,10 @@
                         $("#kelurahan").attr('disabled','true');
 
                         // form input di reset
-                        $("input[name=meninggal]").val();
-                        $("input[name=luka_berat]").val();
-                        $("input[name=luka_ringan]").val();
-                        $("input[name=kermat]").val();
+                        $("input[name=meninggal]").val(0);
+                        $("input[name=luka_berat]").val(0);
+                        $("input[name=luka_ringan]").val(0);
+                        $("input[name=kermat]").val("");
                         $("#waktu").val('').trigger('change') ;
                         $("#jenis_kendaraan").val('').trigger('change') ;
                         $("#profesi").val('').trigger('change') ;
@@ -470,6 +470,15 @@
                 window.location = "<?php echo base_url('admin/Data_kecelakaan') ?>" ;
             } else {
             // swal("Data Tidak Terhapus !");
+            }
+        });
+    }
+    function hapus_dt_kolom(id)
+    {
+        $.ajax({
+            url: "<?=base_url('admin/Data_kecelakaan/hapus_dt_kolom_add')?>"+id,
+            success: function (response) {
+                alert('sukses data kecelakaan berhasil dihapus');
             }
         });
     }

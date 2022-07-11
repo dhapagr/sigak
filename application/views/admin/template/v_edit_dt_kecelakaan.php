@@ -189,6 +189,9 @@
                                         <div class="col-12">
                                             <hr>
                                         </div> 
+                                        <div class="card-body">
+                                            <div id="tabel-data-kecelakaan" class="mb-2"></div>
+                                        </div>
                                         <div class="col-12">
                                             <h4 class="card-title">
                                                 Jenis Korban & Kerugian Materi
@@ -692,4 +695,15 @@
             //     }
             // });
     }
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+        var wrapper = document.getElementById("tabel-data-kecelakaan");
+        $.ajax({
+            url: "<?=base_url('admin/Data_kecelakaan/show_data_edit_kecelakaan')?>",
+            success: function (response) {
+                $(wrapper).html(response);
+            }
+        });
+    });
 </script>
