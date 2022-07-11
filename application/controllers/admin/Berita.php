@@ -204,6 +204,7 @@ class Berita extends CI_Controller {
 	}
 	function hapus($id){
 		$where = array('id_berita' => $id);
+		$this->db->delete('tb_berita_dilihat', $where);
 		$this->db->delete('tb_berita', $where);
 		$this->Admin_model->hapus_data($where,'tb_berita');
 		$this->session->set_flashdata('test', 
