@@ -82,7 +82,7 @@
                     <div class="card icon-tab">
                         <div class="card-body mt-2"> 
                             <?php foreach ($data_by_id as $data) : ?>
-                                <form method="post" action="<?php echo base_url('admin/Data_kecelakaan/update/'.$data['id_kecelakaan']) ?>" enctype="multipart/form-data" class="wizard-horizontal">
+                                <!-- <form method="post" action="<?php echo base_url('admin/Data_kecelakaan/update/'.$data['id_kecelakaan']) ?>" enctype="multipart/form-data" class="wizard-horizontal"> -->
                                     <h6>
                                         <i class="step-icon"></i>
                                         <span class="fonticon-wrap">
@@ -197,30 +197,32 @@
                                                 Jenis Korban & Kerugian Materi
                                             </h4>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-12" id="edit_data_kecelakaan">
                                             <div class="row">
                                                 <div class="col-md-3">
                                                     <div class="d-inline-block mb-1">
+                                                        <!-- id kecelakaan -->
+                                                        <input type="hidden" name="id_kecelakaan" id="id_kecelakaan">
                                                         <label for="basicInput">Meninggal Dunia</label>
-                                                        <input type="number" class="touchspin-icon"  min="0" value="<?= $data['meninggal_dunia']?>" name="md_edit" >
+                                                        <input type="number" class="touchspin-icon"  min="0" value="0" name="md_edit" id="meninggal">
                                                     </div>
                                                 </div>   
                                                 <div class="col-md-3">
                                                     <div class="d-inline-block mb-1">
                                                         <label for="basicInput">Luka Berat</label>
-                                                        <input type="number" class="touchspin-icon"  min="0" value="<?= $data['luka_berat']?>" name="lb_edit" >
+                                                        <input type="number" class="touchspin-icon"  min="0" value="0" name="lb_edit"id="luka_berat">
                                                     </div>
                                                 </div>   
                                                 <div class="col-md-3">
                                                     <div class="d-inline-block mb-1">
                                                         <label for="basicInput">Luka Ringan</label>
-                                                        <input type="number" class="touchspin-icon"  min="0" value="<?= $data['luka_ringan']?>" name="lk_edit" >
+                                                        <input type="number" class="touchspin-icon"  min="0" value="0" name="lk_edit" id="luka_ringan">
                                                     </div>
                                                 </div>   
                                                 <div class="col-md-3">
                                                     <fieldset class="form-group">
                                                         <label for="basicInput">Kerugian Materi</label>
-                                                        <input type="number" name="kermat_edit" class="form-control" id="kermat" value="<?= $data['kerugian_materi']?>" placeholder="ex: 50000" required/>
+                                                        <input type="number" name="kermat_edit" class="form-control" id="kermat" value="0" placeholder="ex: 50000" required/>
                                                     </fieldset>
                                                 </div>
                                             </div>
@@ -234,14 +236,10 @@
                                                             Kejadian Menurut Waktu
                                                         </h4>
                                                         <div class="input-group">
-                                                            <select class="select2" name="waktu" required>
-                                                                <?php foreach ($data_waktu as $k) :?>
-                                                                    <?php foreach ($data_by_id as $dt) :
-                                                                        if($dt['id_waktukej'] == $k['id_waktukej']):?>
-                                                                            <option value="<?php echo $dt['id_waktukej'] ?>" selected><?php echo$dt['jenis_waktu'] ?></option>
-                                                                        <?php else:?>
-                                                                            <option value="<?php echo $k['id_waktukej'] ?>"><?php echo$k['jenis_waktu'] ?></option>
-                                                                    <?php endif; endforeach ?>
+                                                            <select class="select2" name="waktu" required id="waktu">
+                                                                <option value="" disabled selected hidden>Waktu Kejadian</option>
+                                                                <?php foreach ($data_waktu as $wkt) :?>
+                                                                    <option value="<?php echo $wkt['id_waktukej'] ?>"><?php echo$wkt['jenis_waktu'] ?></option>
                                                                 <?php endforeach ?>
                                                             </select>
                                                         </div>
@@ -253,14 +251,10 @@
                                                             Jenis Kendaraan
                                                         </h4>
                                                         <div class="input-group">
-                                                            <select class="select2" name="jenis_kendaraan" required>
-                                                                <?php foreach ($data_kendaraan as $k) :?>
-                                                                    <?php foreach ($data_by_id as $dt) :
-                                                                        if($dt['id_jenis'] == $k['id_jenis']):?>
-                                                                            <option value="<?php echo $dt['id_jenis'] ?>" selected><?php echo$dt['jenis_kendaraan'] ?></option>
-                                                                        <?php else:?>
-                                                                            <option value="<?php echo $k['id_jenis'] ?>"><?php echo$k['jenis_kendaraan'] ?></option>
-                                                                    <?php endif; endforeach ?>
+                                                            <select class="select2" name="jenis_kendaraan" id="jenis_kendaraan" required>
+                                                                <option value="" disabled selected hidden>Jenis Kendaraan</option>
+                                                                <?php foreach ($data_kendaraan as $kendaraan) :?>
+                                                                    <option value="<?php echo $kendaraan['id_jenis'] ?>"><?php echo$kendaraan['jenis_kendaraan'] ?></option>
                                                                 <?php endforeach ?>
                                                             </select>
                                                         </div>
@@ -272,17 +266,10 @@
                                                             Korban Menurut Profesi
                                                         </h4>
                                                         <div class="input-group">
-                                                            <select class="select2" name="profesi" required>
-                                                                <?php foreach ($data_profesi as $k) :?>
-                                                                    <?php foreach ($data_by_id as $dt) :
-                                                                        if($dt['id_profesi'] == $k['id_profesi']):?>
-                                                                            <option value="<?php echo $dt['id_profesi'] ?>" selected><?php echo$dt['profesi'] ?></option>
-                                                                        <?php else:?>
-                                                                            <option value="<?php echo $k['id_profesi'] ?>"><?php echo$k['profesi'] ?></option>
-                                                                    <?php endif; endforeach ?>
-                                                                <?php endforeach ?>
+                                                            <select class="select2" name="profesi" id="profesi" required>
+                                                                <option value="" disabled selected hidden>Profesi Korban</option>
                                                                 <?php foreach ($data_profesi as $profesi) :?>
-                                                                    <!-- <option value="<?php echo $profesi['id_profesi'] ?>"><?php echo$profesi['profesi'] ?></option> -->
+                                                                    <option value="<?php echo $profesi['id_profesi'] ?>"><?php echo$profesi['profesi'] ?></option>
                                                                 <?php endforeach ?>
                                                             </select>
                                                         </div>
@@ -299,14 +286,10 @@
                                                             Menurut Umur
                                                         </h4>
                                                         <div class="input-group">
-                                                            <select class="select2" name="umur" required>
-                                                                <?php foreach ($data_umur as $k) :?>
-                                                                    <?php foreach ($data_by_id as $dt) :
-                                                                        if($dt['id_umur'] == $k['id_umur']):?>
-                                                                            <option value="<?php echo $dt['id_umur'] ?>" selected><?php echo$dt['umur'] ?></option>
-                                                                        <?php else:?>
-                                                                            <option value="<?php echo $k['id_umur'] ?>"><?php echo$k['umur'] ?></option>
-                                                                    <?php endif; endforeach ?>
+                                                            <select class="select2" name="umur" id="umur" required>
+                                                                <option value="" selected disabled hidden>Umur Korban</option>
+                                                                <?php foreach ($data_umur as $umur) :?>
+                                                                    <option value="<?php echo $umur['id_umur'] ?>"><?php echo$umur['umur'] ?></option>
                                                                 <?php endforeach ?>
                                                             </select>
                                                         </div>
@@ -318,14 +301,10 @@
                                                             Type Kejadian
                                                         </h4>
                                                         <div class="input-group">
-                                                            <select class="select2" name="type" required>
-                                                                <?php foreach ($data_type as $k) :?>
-                                                                    <?php foreach ($data_by_id as $dt) :
-                                                                        if($dt['id_type'] == $k['id_type']):?>
-                                                                            <option value="<?php echo $dt['id_type'] ?>" selected><?php echo$dt['type_kejadian'] ?></option>
-                                                                        <?php else:?>
-                                                                            <option value="<?php echo $k['id_type'] ?>"><?php echo$k['type_kejadian'] ?></option>
-                                                                    <?php endif; endforeach ?>
+                                                            <select class="select2" name="type" id="type" required>
+                                                                <option value="" disabled selected hidden>Type Kejadian</option>
+                                                                <?php foreach ($data_type as $type) :?>
+                                                                    <option value="<?php echo $type['id_type'] ?>"><?php echo$type['type_kejadian'] ?></option>
                                                                 <?php endforeach ?>
                                                             </select>
                                                         </div>
@@ -342,7 +321,7 @@
                                                 <button type="reset" onclick="tutup()" class="btn btn-danger glow mr-1 mb-1"><i class="bx bxs-x-square"></i>
                                                     <span class="align-middle ml-25">Clear Data</span> 
                                                 </button>
-                                                <button type="submit" class="btn btn-warning glow mr-1 mb-1"><i class="bx bxs-add-to-queue"></i>
+                                                <button type="button" class="btn btn-warning glow mr-1 mb-1" onclick="simpan_perubahan_data()"><i class="bx bxs-add-to-queue"></i>
                                                     <span class="align-middle ml-25">Edit Data</span>
                                                 </button>
                                             </fieldset>
@@ -700,10 +679,91 @@
 	$(document).ready(function() {
         var wrapper = document.getElementById("tabel-data-kecelakaan");
         $.ajax({
-            url: "<?=base_url('admin/Data_kecelakaan/show_data_edit_kecelakaan')?>",
+            url: "<?=base_url('admin/Data_kecelakaan/show_data_edit_kecelakaan/'.$longitude.'/'.$latitude)?>",
             success: function (response) {
                 $(wrapper).html(response);
             }
         });
     });
+
+    function hapus_data_kecelakaan(id_kecelakaan){
+        console.log(id_kecelakaan);
+    }
+
+    function edit_data_kecelakaan(id_kecelakaan){
+        $("#meninggal").focus();
+        $.ajax({
+            url: "<?=base_url('admin/Data_kecelakaan/get_data_kecelakaan_id/')?>"+id_kecelakaan,
+            dataType: 'json',
+            success: function (data) {
+                for (let i = 0; i < data.length; i++) {
+                    $("#id_kecelakaan").val(data[i].id_kecelakaan);
+                    $("#meninggal").val(data[i].meninggal_dunia);
+                    $("#luka_ringan").val(data[i].luka_ringan);
+                    $("#luka_berat").val(data[i].luka_berat);
+                    $("#kermat").val(data[i].kerugian_materi);
+                    $("#waktu").val(data[i].id_waktu).trigger('change');
+                    $("#jenis_kendaraan").val(data[i].id_jenis).trigger('change') ;
+                    $("#profesi").val(data[i].id_profesi).trigger('change') ;
+                    $("#umur").val(data[i].id_umur).trigger('change') ;
+                    $("#type").val(data[i].id_type).trigger('change') ;
+                }
+            }
+        });
+    }
+
+    function simpan_perubahan_data(){
+            var id_kecelakaan   = $("#id_kecelakaan").val();
+            var meninggal       = $("#meninggal").val();
+            var luka_berat      = $("#luka_ringan").val();
+            var luka_ringan     = $("#luka_berat").val();
+            var kermat          = $("#kermat").val();
+            var waktu           = $("#waktu").val();
+            var jenis_kendaraan = $("#jenis_kendaraan").val();
+            var profesi         = $("#profesi").val();
+            var umur            = $("#umur").val();
+            var type            = $("#type").val();
+            
+            $.ajax({
+                type: "Post",
+                url: "<?=base_url('admin/Data_kecelakaan/update_data_kecelakaan/')?>"+id_kecelakaan,
+                data: {
+                    meninggal : meninggal,
+                    luka_berat : luka_berat,
+                    luka_ringan : luka_ringan,
+                    kermat : kermat,
+                    waktu : waktu,
+                    jenis_kendaraan : jenis_kendaraan,
+                    profesi : profesi,
+                    umur : umur,
+                    type : type,
+                },
+                success: function (response) {
+                    if(response != 0){
+                        alert('sukses data kecelakaan berhasil diupdate');
+                        // form input di reset
+                        $("#id_kecelakaan").val("");
+                        $("#meninggal").val(0);
+                        $("#luka_ringan").val(0);
+                        $("#luka_berat").val(0);
+                        $("#kermat").val("");
+                        $("#waktu").val('').trigger('change') ;
+                        $("#jenis_kendaraan").val('').trigger('change') ;
+                        $("#profesi").val('').trigger('change') ;
+                        $("#umur").val('').trigger('change') ;
+                        $("#type").val('').trigger('change') ;
+
+                        $.ajax({
+                            url: "<?=base_url('admin/Data_kecelakaan/show_data_edit_kecelakaan/'.$longitude.'/'.$latitude)?>",
+                            success: function (response) {
+                                $("#tabel-data-kecelakaan").html(response);
+                            }
+                        });
+
+                    }else{
+                        alert('semuan inputan wajib diisi!');
+                    }
+                }
+            });
+    }
 </script>

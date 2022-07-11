@@ -24,7 +24,12 @@ class Data_kecelakaan extends CI_Controller {
 		// $data['data_kecamatan']	= $this->Admin_model->tampil_data_kecamatan()->result_array();
 		$data['data_user']			= $this->Admin_model->get_dataById($id_user);
 		$data['data_lokasi'] 		= $this->Admin_model->tampil_data_lokasi()->result_array();
-		$data['data_kecelakaan'] 	= $this->db->get('tb_kecelakaan')->result_array();
+		
+		$this->db->select('*');
+		$this->db->from('tb_kecelakaan');
+		$this->db->group_by('longitude');
+		$data['data_kecelakaan'] 	= $this->db->get()->result_array();
+
 		$data['data_wilayah']		= $this->Admin_model->tampil_data_kecelakaan()->result_array();
 		$data['data_kecamatan'] 	= $this->db->get('tb_kecamatan')->result_array();
 		$data['data'] = array(
@@ -90,7 +95,12 @@ class Data_kecelakaan extends CI_Controller {
 		redirect('admin/Data_kecelakaan');
 	}
 
-	function edit($id)
+	// public function edit_view($id_kecelakaan, $longitude, $latitude)
+	// {
+	// 	$this_>db->get	
+	// }
+
+	function edit($id, $longitude, $latitude)
 	{
 		// $where = $this->db->where('id_kecelakaan',$id);
 		$id_user = $this->session->userdata('id_user');		
@@ -108,6 +118,10 @@ class Data_kecelakaan extends CI_Controller {
 		$data['data_umur']			= $this->db->get('tb_umurkorban')->result_array();
 		$data['data_type']			= $this->db->get('tb_typekejadian')->result_array();
 		$data['data_all'] 			= $this->db->query("SELECT * FROM tb_kecelakaan WHERE id_kecelakaan = '$id'")->result_array();
+
+		$data['longitude'] = $longitude;
+		$data['latitude'] = $latitude;
+		
 		$this->load->view('admin/template/navigation_admin', $data);
 		$this->load->view('admin/template/v_edit_dt_kecelakaan', $data); 
 		$this->load->view('admin/template/footer_admin');
@@ -347,7 +361,7 @@ class Data_kecelakaan extends CI_Controller {
 
 		$this->load->view('admin/template/v_tambah_data_kecelakaan', $data);
 	}
-	public function show_data_edit_kecelakaan()
+	public function show_data_edit_kecelakaan($longitude, $latitude)
 	{
 		$data['data_wilayah']		= $this->Admin_model->tampil_data_kecelakaan()->result_array();
 		$data['data_kecamatan']		= $this->Admin_model->tampil_data_kecamatan()->result_array();
@@ -356,6 +370,8 @@ class Data_kecelakaan extends CI_Controller {
 		$data['data_profesi']		= $this->db->get('tb_profesikorban')->result_array();
 		$data['data_umur']			= $this->db->get('tb_umurkorban')->result_array();
 		$data['data_type']			= $this->db->get('tb_typekejadian')->result_array();
+
+		$data['data_kecelakaan'] = $this->db->get_where('tb_kecelakaan', ['longitude' => $longitude, 'latitude' => $latitude])->result_array();
 
 		$this->load->view('admin/template/v_edit_data_kecelakaan', $data);
 	}
@@ -378,6 +394,10 @@ class Data_kecelakaan extends CI_Controller {
 
 		if($jalan != '' && $longitude != '' && $latitude != '' && $kecamatan != '' && $kelurahan != '' && $meninggal != '' && $luka_berat != '' && $luka_ringan != '' && $kermat != '' && $waktu != '' && $jenis_kendaraan != '' && $profesi != '' && $umur != '' && $type != ''){
 
+			if($meninggal >= 3){$prosentase = 'Berat';}
+			elseif($meninggal == 2){$prosentase = 'Sedang';}
+			else{$prosentase = 'Ringan';}
+
 			$data = [
 				'nama_jalan'		=> $jalan,
 				'longitude'			=> $longitude,
@@ -393,6 +413,7 @@ class Data_kecelakaan extends CI_Controller {
 				'id_profesi'		=> $profesi,
 				'id_umur'			=> $umur,
 				'id_type'			=> $type,
+				'prosentase' 		=> $prosentase,
 			];
 
 			$this->db->insert('tb_kecelakaan', $data);
@@ -402,9 +423,56 @@ class Data_kecelakaan extends CI_Controller {
 			echo 0; // ada inputan kosong
 		}
 	}
+
 	function hapus_dt_kolom_add($id){
 		$where = array('id_kecelakaan' => $id);
 		$this->db->delete('tb_kecelakaan', $where);
 		$this->Admin_model->hapus_data($where,'tb_kecelakaan');		
+	}
+
+	public function get_data_kecelakaan_id($id_kecelakaan)
+	{
+		$data = $this->db->get_where('tb_kecelakaan', ['id_kecelakaan' => $id_kecelakaan])->result_array();
+		echo json_encode($data);
+	}
+
+	public function update_data_kecelakaan($id_kecelakaan)
+	{
+		$meninggal			= $this->input->post('meninggal');
+		$luka_berat			= $this->input->post('luka_berat');
+		$luka_ringan		= $this->input->post('luka_ringan');
+		$kermat				= $this->input->post('kermat');
+		$waktu				= $this->input->post('waktu');
+		$jenis_kendaraan	= $this->input->post('jenis_kendaraan');
+		$profesi			= $this->input->post('profesi');
+		$umur				= $this->input->post('umur');
+		$type				= $this->input->post('type');
+
+		if($meninggal != '' && $luka_berat != '' && $luka_ringan != '' && $kermat != '' && $waktu != '' && $jenis_kendaraan != '' && $profesi != '' && $umur != '' && $type != ''){
+
+			if($meninggal >= 3){$prosentase = 'Berat';}
+			elseif($meninggal == 2){$prosentase = 'Sedang';}
+			else{$prosentase = 'Ringan';}
+
+			$data = [
+				'meninggal_dunia'	=> $meninggal,
+				'luka_berat'		=> $luka_berat,
+				'luka_ringan'		=> $luka_ringan,
+				'kerugian_materi'	=> $kermat,
+				'id_waktu'			=> $waktu,
+				'id_jenis'			=> $jenis_kendaraan,
+				'id_profesi'		=> $profesi,
+				'id_umur'			=> $umur,
+				'id_type'			=> $type,
+				'prosentase' 		=> $prosentase,
+			];
+
+			$where = ['id_kecelakaan' => $id_kecelakaan];
+
+			$this->db->update('tb_kecelakaan', $data, $where);
+			echo 1;
+		}else{
+			echo 0; // ada inputan kosong
+		}
 	}
 }
