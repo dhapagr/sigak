@@ -61,7 +61,7 @@
                                                 <tbody>
                                                     <?php
                                                     $no = 1;
-                                                    foreach ($data_wilayah as $data) :
+                                                    foreach ($data_kecelakaan as $data) :
                                                     ?>
                                                     <tr>
                                                         <form action="<?php echo base_url("admin/Data_kecelakaan/edit/".$data['id_kecelakaan']);?>" method=POST enctype="multipart/form-data">
@@ -96,7 +96,7 @@
                                                             <td>
                                                                 <div  class="form-row">
                                                                     <button type="button" class="btn btn-icon btn-info mr-1 mb-1" data-toggle="modal" data-target="#myModal<?= $data['id_kecelakaan']?>"><i class="bx bx-info-circle"></i></button>
-                                                                    <button type="button" class="btn btn-icon btn-warning mr-1 mb-1" onclick="window.location.href='<?php echo base_url('admin/Data_kecelakaan/edit/'.$data['id_kecelakaan']) ?>'"><i class="bx bx-edit" ></i></button>
+                                                                    <button type="button" class="btn btn-icon btn-warning mr-1 mb-1" onclick="window.location.href='<?php echo base_url('admin/Data_kecelakaan/edit/'.$data['id_kecelakaan'].'/'.$data['longitude'].'/'.$data['latitude']) ?>'"><i class="bx bx-edit" ></i></button>
                                                                     <button type="button" onclick="hapus(<?php echo $data['id_kecelakaan'] ?>)" class="btn btn-icon btn-danger mr-1 mb-1"><i class="bx bxs-trash"></i></button>
                                                                 </div>                                       
                                                             </td> 
